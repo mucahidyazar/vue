@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Getting Started</title>
+    <script src="https://unpkg.com/vue@next"></script>
+  </head>
+  <body>
+    <div id="counter">
+      <h1>Counter: {{ counter }}</h1>
+      <h2 v-bind:title="message">Hover olunca mesaj gozukecek</h2>
+
+      <hr />
+      <h4>
+        Event Handling: v-on:click="Buraya methodslarda olan yakalamak
+        istedigimiz fonksiyonu yaziyoruz."
+      </h4>
+      <div id="event-handling">
+        <p>{{ message }}</p>
+        <button v-on:click="reverseMessage">Reverse Message</button>
+      </div>
+
+      <hr />
+      <h4>v-model="data da bulunan property ismi yazilir"</h4>
+      <p>
+        asagida vmodel tanimladigimiz inputu degistirirsek v-model="message"
+        yaptigimiz message propertyside degisecektir dynamic olarak
+      </p>
+      <input v-model="message" />
+
+      <hr />
+      <h4>Kosullu kullanimlar / v-if</h4>
+      <div id="conditional-rendering">
+        <span v-if="seen">Now you see me</span>
+      </div>
+
+      <hr />
+      <h4>Loops / v-for="todo in todos"</h4>
+      <ol>
+        <li v-for="tekTodo in todos">{{tekTodo.text}}</li>
+      </ol>
+    </div>
+
+    <script type="module">
+      const CounterApp = {
+        data() {
+          return {
+            counter: 0,
+            message: "Deneme gosterilecek mesaj bu",
+            seen: true,
+            todos: [
+              { text: "Learn Javascrit" },
+              { text: "Learn Vue" },
+              { text: "Build something awesome" },
+            ],
+          };
+        },
+        mounted() {
+          setInterval(() => {
+            this.counter++;
+          }, 1000);
+        },
+        methods: {
+          reverseMessage() {
+            this.message = this.message.split("").reverse().join("");
+          },
+        },
+      };
+
+      Vue.createApp(CounterApp).mount("#counter");
+    </script>
+  </body>
+</html>
