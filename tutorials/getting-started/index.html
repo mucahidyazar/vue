@@ -39,6 +39,11 @@
       <h4>Loops / v-for="todo in todos"</h4>
       <ol>
         <li v-for="tekTodo in todos">{{tekTodo.text}}</li>
+        <todo-item
+          v-for="item in todos"
+          v-bind:todo="item"
+          v-bind:key="item.id"
+        ></todo-item>
       </ol>
     </div>
 
@@ -68,7 +73,12 @@
         },
       };
 
-      Vue.createApp(CounterApp).mount("#counter");
+      const app = Vue.createApp(CounterApp);
+      app.component("todo-item", {
+        props: ["todo"],
+        template: `<li>{{ todo.text }}</li>`,
+      });
+      app.mount("#counter");
     </script>
   </body>
 </html>
