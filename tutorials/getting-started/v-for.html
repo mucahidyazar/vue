@@ -9,8 +9,49 @@
   <body>
     <div id="exercise">
       <ul>
+        <!-- without index -->
         <li v-for="product in products">{{ product }}</li>
+        <!-- with index -->
+        <li v-for="(product, index) in products">
+          {{ index }} - {{ product }}
+        </li>
       </ul>
+
+      <!-- ul li kullanmak zorunda degiliz istersek div ilede kullanabiliriz v-for'u -->
+      <div v-for="person in persons" style="border: 1px solid black">
+        <p>{{ person.name }}</p>
+        <p>{{ person.email }}</p>
+      </div>
+
+      <!-- Key ve Index almak -->
+      <div v-for="person in persons" style="border: 1px solid black">
+        <ul>
+          <li v-for="(value, key, index) in person">
+            {{ index }} - <strong>{{ key }}</strong> - {{ value }}
+          </li>
+        </ul>
+      </div>
+
+      <!-- v-for ile belirli sayida dongu -->
+      <span v-for="i in 5">{{ i }}</span>
+
+      <!-- ul li kullanmak zorunda degiliz istersek div ilede kullanabiliriz v-for'u -->
+      <div
+        v-for="product in products"
+        style="border: 1px solid black"
+        :key="product"
+      >
+        <p>{{ product }}</p>
+      </div>
+      <button @click="products.push('Speaker')">Yeni Eleman Ekle</button>
+
+      <!-- template elementi bir element olarak render edilmez ayni react fragmentler gibi. -->
+      <template>
+        <p>
+          Bu p elementinin ustunde template'den dolayi gelen bir parent element
+          yoktur
+        </p>
+      </template>
     </div>
 
     <script type="module">
