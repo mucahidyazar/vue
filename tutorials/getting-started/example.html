@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Getting Started</title>
+    <script src="https://unpkg.com/vue@next"></script>
+  </head>
+  <body>
+    <div id="exercise">
+      <button v-on:click="showAlert('gokhan', $event)">Click Me</button>
+
+      <p>{{ counter }}</p>
+      <button v-on:click="increase">increase Fn</button>
+      <button v-on:click="decrease">decrease Fn</button>
+
+      <p v-on:mousemove="updateCors">
+        Kordinatlar : {{ x }}, {{ y }}
+        <span v-on:mousemove.stop>GIZLI BOLME</span>
+      </p>
+
+      <p>Bu event her tusa basip biraktiginizda calisir</p>
+      <input type="text" v-on:keyup="catchKeys" />
+
+      <p>Bu event ise enter ve space'ye basildiginda calisir</p>
+      <input type="text" v-on:keyup.enter.space="catchValue" />
+
+      <hr />
+      <input type="text" v-model="value" />
+      <p>{{ value }}</p>
+    </div>
+
+    <script type="module">
+      const CounterApp = {
+        data: () => {
+          return {
+            value: "Test",
+            counter: 0,
+            x: 0,
+            y: 0,
+          };
+        },
+        methods: {
+          showAlert: function (name) {
+            alert(name);
+          },
+          increase: function () {
+            this.counter++;
+          },
+          decrease: function () {
+            this.counter--;
+          },
+          updateCors: function (e) {
+            this.x = e.clientX;
+            this.y = e.clientY;
+          },
+          catchKeys: function (e) {
+            console.log(e.key);
+          },
+          catchValue: function (e) {
+            console.log(e.target.value);
+          },
+        },
+      };
+
+      const app = Vue.createApp(CounterApp);
+      app.mount("#exercise");
+    </script>
+  </body>
+</html>

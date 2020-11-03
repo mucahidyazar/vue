@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Getting Started</title>
+    <script src="https://unpkg.com/vue@next"></script>
+  </head>
+  <body>
+    <div id="exercise">
+      <!-- 1) Butona tıklanıldığında bir alert kutusu çıkartınız -->
+      <div>
+        <button v-on:click="showAlert">Alert Göster</button>
+      </div>
+      <!-- 2) "keydown" event'ini dinleyerek value değişkeni içerisinde yazdığınız veriyi saklayın. (ipucu: event.target.value size yazdığınız değeri verebilir.) -->
+      <div>
+        <input type="text" v-on:keyup="catchValue" />
+        <p>{{ value }}</p>
+      </div>
+      <!-- 3) 2.Uygulamayı düzenleyerek eğer keydown ENTER ise yazdığınız verinin value değerine aktarılmasını sağlayın -->
+      <div>
+        <input type="text" v-on:keydown.enter="catchKeydownEnter" />
+        <p>{{ value }}</p>
+      </div>
+    </div>
+
+    <script type="module">
+      const CounterApp = {
+        data: () => {
+          return {
+            value: "Value",
+          };
+        },
+        methods: {
+          showAlert: function () {
+            alert("This is an alert!");
+          },
+          catchValue: function (e) {
+            this.value = e.target.value;
+          },
+          catchKeydownEnter: function (e) {
+            this.value = e.target.value;
+          },
+        },
+      };
+
+      const app = Vue.createApp(CounterApp);
+      app.mount("#exercise");
+    </script>
+  </body>
+</html>

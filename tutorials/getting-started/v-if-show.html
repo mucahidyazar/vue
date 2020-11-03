@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Getting Started</title>
+    <script src="https://unpkg.com/vue@next"></script>
+  </head>
+  <body>
+    <div id="exercise">
+      <p v-if="true">Bu DOM'da gozukur</p>
+      <p v-if="false">Bu DOM'da gozukmez</p>
+      <p v-if="show">Beni gorebilir misin acaba?</p>
+      <button @click="show = !show">Show / Hide</button>
+
+      <hr />
+      <p v-if="sayi < 10">Sayi 10'dan kucuktur</p>
+      <p v-else-if="sayi === 10">Sayi 10'a esittir</p>
+      <p v-else="sayi > 10">Sayi 10'dan buyuktur</p>
+
+      <hr />
+      <p v-show="show">Bu sadece gizlenir aslinda DOM uzerinde halen vardir</p>
+    </div>
+
+    <script type="module">
+      const CounterApp = {
+        data: () => {
+          return {
+            show: false,
+            sayi: 15,
+          };
+        },
+        methods: {},
+      };
+
+      const app = Vue.createApp(CounterApp);
+      app.mount("#exercise");
+    </script>
+  </body>
+</html>

@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Getting Started</title>
+    <script src="https://unpkg.com/vue@next"></script>
+    <style>
+      .box {
+        width: 100px;
+        height: 100px;
+        background-color: gray;
+        display: inline-block;
+        margin-right: 5px;
+      }
+      .green {
+        background-color: green;
+      }
+      .blue {
+        background-color: blue;
+      }
+    </style>
+  </head>
+  <body>
+    <div id="exercise">
+      <div class="box" :style="{ 'background-color':color }"></div>
+      <div class="box" :style="customStyle"></div>
+      <div class="box" :style="[customStyle2, { width: 250 + 'px' }]"></div>
+      <div class="box"></div>
+
+      <hr />
+      <input type="text" v-model="color" />
+    </div>
+
+    <script type="module">
+      const CounterApp = {
+        data: () => {
+          return {
+            color: "green",
+          };
+        },
+        methods: {},
+        computed: {
+          customStyle: function () {
+            return {
+              backgroundColor: this.color,
+            };
+          },
+          customStyle: function () {
+            return {
+              height: "150px",
+              backgroundColor: this.color,
+            };
+          },
+        },
+      };
+
+      const app = Vue.createApp(CounterApp);
+      app.mount("#exercise");
+    </script>
+  </body>
+</html>

@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Getting Started</title>
+    <script src="https://unpkg.com/vue@next"></script>
+  </head>
+  <body>
+    <div id="exercise">
+      <button v-on:click="value++">Increase ++</button>
+      <button v-on:click="value--">Decrease --</button>
+      <p>{{ value }}</p>
+    </div>
+
+    <script type="module">
+      const CounterApp = {
+        data: () => {
+          return {
+            value: 0,
+          };
+        },
+        methods: {
+          // output: function () {
+          //   return this.value > 10 ? "10'dan buyuktur" : "10'dan kucuktur";
+          // },
+        },
+        computed: {
+          output: function () {
+            return this.value > 10 ? "10'dan buyuktur" : "10'dan kucuktur";
+          },
+        },
+        watch: {
+          value: function (value) {
+            if (value === 10) {
+              this.value = 0;
+            }
+          },
+        },
+      };
+
+      const app = Vue.createApp(CounterApp);
+      app.mount("#exercise");
+    </script>
+  </body>
+</html>
