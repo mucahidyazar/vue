@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Getting Started</title>
+    <script src="https://unpkg.com/vue@next"></script>
+  </head>
+  <body>
+    <div id="exercise">
+      <input type="text" ref="userText" @input="setText" />
+      <p>{{ value }}</p>
+    </div>
+
+    <script type="module">
+      const CounterApp = {
+        data: () => {
+          return {
+            message: "Example",
+          };
+        },
+        methods: {
+          setText() {
+            // this.message = this.$refs.userText
+            console.log(this.$refs.userText); //Inputtaki tum method propertyleri gosterir bu sekilde
+            console.log(this.$refs.userText.value); //Bu sekilde valueyi alabiliriz.
+          },
+        },
+        beforeCreate() {
+          console.log("This will work before create.");
+        },
+        created() {
+          console.log("This will work when it created.");
+        },
+        beforeMount() {
+          console.log("This will work when it before mount.");
+        },
+        mounted() {
+          console.log("This will work when it mounted.");
+        },
+        beforeUpdate() {
+          console.log("This will work when it before update.");
+        },
+        updated() {
+          console.log("This will work when it updated.");
+        },
+        beforeUnmount() {
+          console.log("This will work when it before unmount.");
+        },
+        unmounted() {
+          console.log("This will work when it unmounted.");
+        },
+      };
+
+      const app = Vue.createApp(CounterApp);
+      app.mount("#exercise");
+    </script>
+  </body>
+</html>

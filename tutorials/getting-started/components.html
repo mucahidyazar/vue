@@ -1,0 +1,115 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Getting Started</title>
+    <script src="https://unpkg.com/vue@next"></script>
+  </head>
+  <body>
+    <div id="app">
+      <ul>
+        <friend-contact></friend-contact>
+        <friend-contact></friend-contact>
+      </ul>
+    </div>
+
+    <script type="module">
+      const ExampleApp = {
+        data: () => {},
+        methods: {},
+      };
+      const app = Vue.createApp(ExampleApp);
+
+      //2 argument alir
+      //1. argument string olmali ve bu string - ile ayrilmalidir. camelCase olmamali kebap-case olmalidir. kemalCase'i HTML tanimaz cunku.
+      //2. argument ise vue instancemiz gibi icinde data, methods, copmputed, watch gibi benzer degerler iceren objedir.
+      app.component("friend-contact", {
+        template: `
+          <li>
+            <h2>{{ friend.name }}</h2>
+            <button @click="toggleVisible">Show Details</button>
+            <ul v-if="areDetailsVisible">
+              <li><strong>Phone:</strong> {{ friend.phone }}</li>
+              <li><strong>Email:</strong> {{ friend.email }}</li>
+            </ul>
+          </li>
+        `,
+        data() {
+          return {
+            areDetailsVisible: false,
+            friend: {
+              id: 1,
+              name: "Manuel Lorenz",
+              phone: "+905534085555",
+              email: "manuel@example.com",
+            },
+          };
+        },
+        methods: {
+          toggleVisible() {
+            this.areDetailsVisible = !this.areDetailsVisible;
+          },
+        },
+      });
+
+      app.mount("#app");
+    </script>
+  </body>
+</html>
+
+<!-- <!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Getting Started</title>
+    <script src="https://unpkg.com/vue@next"></script>
+  </head>
+  <body>
+    <div id="app">
+      <ul>
+        <li v-for="friend in friends" :key="friend.id">
+          <h2>{{ friend.name }}</h2>
+          <button @click="toggleVisible">Show Details</button>
+          <ul v-if="areDetailsVisible">
+            <li><strong>Phone:</strong> {{ friend.phone }}</li>
+            <li><strong>Email:</strong> {{ friend.email }}</li>
+          </ul>
+        </li>
+      </ul>
+    </div>
+
+    <script type="module">
+      const CApp = {
+        data: () => {
+          return {
+            areDetailsVisible: false,
+            friends: [
+              {
+                id: 1,
+                name: "Manuel Lorenz",
+                phone: "+905534085555",
+                email: "manuel@example.com",
+              },
+              {
+                id: 2,
+                name: "Julie Jonez",
+                phone: "+905335085555",
+                email: "julie@example.com",
+              },
+            ],
+          };
+        },
+        methods: {
+          toggleVisible() {
+            this.areDetailsVisible = !this.areDetailsVisible;
+          },
+        },
+      };
+
+      const app = Vue.createApp(CApp);
+      app.mount("#app");
+    </script>
+  </body>
+</html> -->
