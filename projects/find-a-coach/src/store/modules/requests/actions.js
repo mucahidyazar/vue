@@ -1,11 +1,17 @@
+import axios from 'axios';
+
 export default {
-  contactCoach(context, payload) {
+  async contactCoach(context, payload) {
     const newRequest = {
-      id: new Date().toISOString(),
       coachId: payload.coachId,
       email: payload.email,
       message: payload.message
     };
+
+    const res = await axios.post(
+      `https://find-a-coach-ef88a.firebaseio.com/requests/${payload.coachId}.json`
+    );
+
     context.commit('addRequest', newRequest);
   }
 };
