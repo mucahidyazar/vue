@@ -5,7 +5,9 @@ import getters from './getters';
 const RequestsModule = {
   namespaced: true,
   state() {
-    return {};
+    return {
+      requests: []
+    };
   },
   actions,
   mutations,
