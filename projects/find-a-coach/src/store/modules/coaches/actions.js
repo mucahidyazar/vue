@@ -11,8 +11,9 @@ export default {
       areas: data.areas
     };
 
+    const token = context.getters.token;
     const res = await axios.put(
-      `https://find-a-coach-ef88a.firebaseio.com/coaches/${userId}.json`,
+      `https://find-a-coach-ef88a.firebaseio.com/coaches/${userId}.json?auth=${token}`,
       coachData
     );
 
@@ -25,7 +26,11 @@ export default {
       id: userId
     });
   },
-  async loadCoaches(context) {
+  async loadCoaches(context, payload) {
+    if (!payload.forceRefresh && !context.getters.shouldUpdate) {
+      return;
+    }
+
     const res = await axios.get(
       `https://find-a-coach-ef88a.firebaseio.com/coaches.json`
     );
@@ -50,5 +55,6 @@ export default {
     }
 
     context.commit('setCoaches', coaches);
+    context.commit('setFetchTimestamp');
   }
 };
